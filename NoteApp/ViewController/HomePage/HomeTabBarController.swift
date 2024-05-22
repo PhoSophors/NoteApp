@@ -1,3 +1,10 @@
+/**
+ * Name: Pho Sohpors
+ * Date: 18 May 2024
+ *
+ * Home Tab Bar Controller
+ */
+
 import UIKit
 
 class HomeTabBarController: UITabBarController {
@@ -15,11 +22,11 @@ class HomeTabBarController: UITabBarController {
         
         // Set up Settings view controller
         let settingsViewController = SettingsViewController()
-        settingsViewController.username = username // Pass the username to settings view controller
+        settingsViewController.username = username // Pass the username to SettingsViewController
         settingsViewController.title = "Settings"
         let settingsNavigationController = UINavigationController(rootViewController: settingsViewController)
         settingsNavigationController.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(systemName: "gear"), tag: 1)
-        
+       
         // Add the view controllers to the tab bar controller
         viewControllers = [noteFoldersNavigationController, settingsNavigationController]
     }

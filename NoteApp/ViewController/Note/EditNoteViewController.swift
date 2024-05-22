@@ -12,18 +12,22 @@ class EditNoteViewController: UIViewController {
 
     let titleTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Title"
+        textField.placeholder = "Enter title"
         textField.borderStyle = .roundedRect
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.font = UIFont.boldSystemFont(ofSize: 17)
         return textField
     }()
 
-    let detailTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Detail"
-        textField.borderStyle = .roundedRect
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
+    let detailTextField: UITextView = {
+        let textView = UITextView()
+        textView.backgroundColor = . systemGray6
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.font = UIFont.systemFont(ofSize: 17)
+        textView.layer.borderWidth = 0.0
+        textView.layer.borderColor = UIColor.lightGray.cgColor
+        textView.layer.cornerRadius = 5.0
+        return textView
     }()
 
     init(noteTitle: String, noteDetail: String) {
@@ -51,32 +55,29 @@ class EditNoteViewController: UIViewController {
             titleTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             titleTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            titleTextField.heightAnchor.constraint(equalToConstant: 40),
 
             detailTextField.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 20),
             detailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            detailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            detailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            detailTextField.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveChanges))
         
         // Add editingChanged target to text fields to update noteTitle and noteDetail
         titleTextField.addTarget(self, action: #selector(titleTextFieldDidChange(_:)), for: .editingChanged)
-        detailTextField.addTarget(self, action: #selector(detailTextFieldDidChange(_:)), for: .editingChanged)
+        detailTextField.delegate = self
     }
     
     @objc private func titleTextFieldDidChange(_ textField: UITextField) {
         noteTitle = textField.text ?? ""
         print("Title changed to: \(noteTitle)")
     }
-    
-    @objc private func detailTextFieldDidChange(_ textField: UITextField) {
-        noteDetail = textField.text ?? ""
-        print("Detail changed to: \(noteDetail)")
-    }
 
     @objc private func saveChanges() {
         guard !noteTitle.isEmpty, !noteDetail.isEmpty else {
-            navigateToErrorPage(message: "Note title and detail can't be empty")
+            showErrorMessage("Note title and detail can't be empty")
             return
         }
         print("Saving changes with Title: \(noteTitle), Detail: \(noteDetail)")
@@ -84,22 +85,16 @@ class EditNoteViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
 
-    private func navigateToErrorPage(message: String) {
-        let errorViewController = UIViewController()
-        errorViewController.view.backgroundColor = .white
-        errorViewController.title = "Error"
-        
-        let errorLabel = UILabel()
-        errorLabel.text = message
-        errorLabel.textAlignment = .center
-        errorLabel.translatesAutoresizingMaskIntoConstraints = false
-        errorViewController.view.addSubview(errorLabel)
-        
-        NSLayoutConstraint.activate([
-            errorLabel.centerXAnchor.constraint(equalTo: errorViewController.view.centerXAnchor),
-            errorLabel.centerYAnchor.constraint(equalTo: errorViewController.view.centerYAnchor)
-        ])
-        
-        navigationController?.pushViewController(errorViewController, animated: true)
+    private func showErrorMessage(_ message: String) {
+        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
+    }
+}
+
+extension EditNoteViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        noteDetail = textView.text
+        print("Detail changed to: \(noteDetail)")
     }
 }

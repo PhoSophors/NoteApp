@@ -1,3 +1,10 @@
+/**
+ * Name: Pho Sohpors
+ * Date: 18 May 2024
+ *
+ * Settings View Controller
+ */
+
 import UIKit
 
 class SettingsViewController: UIViewController {
@@ -19,7 +26,7 @@ class SettingsViewController: UIViewController {
         
         // Create and setup label for displaying username
         let usernameLabel = UILabel()
-        usernameLabel.text = "Username: \(username ?? "Unknown")"
+        usernameLabel.text = "\(username ?? "Unknown")"
         usernameLabel.textAlignment = .center
         usernameLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(usernameLabel)

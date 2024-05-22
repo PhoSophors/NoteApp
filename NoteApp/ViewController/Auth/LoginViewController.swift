@@ -1,3 +1,10 @@
+/**
+ * Name: Pho Sohpors
+ * Date: 18 May 2024
+ *
+ * Login View Controller
+ */
+
 import UIKit
 
 class LoginViewController: UIViewController {
@@ -134,14 +141,18 @@ class LoginViewController: UIViewController {
             return
         }
 
-        if (username == "aditi" || username == "admin" || username == "Aditi" || username == "Admin" ) && password == "2024" {
-            // Proceed to the home screen
-            navigateToHomeScreen(username: username)
+        if (username == "aditi" || username == "Aditi") && password == "2024" {
+            // Proceed to the home screen with the username
+            navigateToHomeScreen(username: "Aditi")
+        } else if (username == "admin" || username == "Admin") && password == "2024" {
+            // Proceed to the home screen with the username
+            navigateToHomeScreen(username: "Admin")
         } else {
             // Show incorrect password alert
-            showAlert(message: "Incorrect password!")
+            showAlert(message: "Incorrect username or password!")
         }
     }
+
     
     // Function to show an alert with a message
     private func showAlert(message: String) {
@@ -151,7 +162,7 @@ class LoginViewController: UIViewController {
     }
     
     // Function to navigate to the home screen
-    private func navigateToHomeScreen(username: String) {
+    private func navigateToHomeScreen(username: String?) {
         let homeTabBarController = HomeTabBarController()
         homeTabBarController.username = username
         homeTabBarController.modalPresentationStyle = .fullScreen

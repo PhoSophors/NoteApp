@@ -1,3 +1,10 @@
+/**
+ * Name: Pho Sohpors
+ * Date: 21 May 2024
+ *
+ * Folder Collection View Cell
+ */
+
 import UIKit
 import SnapKit
 

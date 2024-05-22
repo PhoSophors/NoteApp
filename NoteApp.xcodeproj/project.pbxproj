@@ -77,18 +77,58 @@
 		183723062BFD337100462FDD /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				183722F02BFD279800462FDD /* LoginViewController.swift */,
-				183722F22BFD27C900462FDD /* HomeTabBarController.swift */,
-				183722F42BFD27E100462FDD /* SettingsViewController.swift */,
-				183722F62BFD27FB00462FDD /* NoteFoldersViewController.swift */,
-				183722F82BFD281D00462FDD /* FolderCollectionViewCell.swift */,
-				183722FA2BFD286D00462FDD /* CreateNoteViewController.swift */,
-				183722FC2BFD288C00462FDD /* EditNoteViewController.swift */,
-				183722FE2BFD28BD00462FDD /* HomeScreenViewController.swift */,
-				183723002BFD295C00462FDD /* FolderDetailViewController.swift */,
-				183723022BFD2F9300462FDD /* NoteDetailViewController.swift */,
+				18731FFB2BFDC5CF00A2A94A /* Setting */,
+				18731FFA2BFDC5BE00A2A94A /* Folder */,
+				18731FF92BFDC5A800A2A94A /* Note */,
+				18731FF82BFDC59300A2A94A /* HomePage */,
+				18731FF72BFDC58500A2A94A /* Auth */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		18731FF72BFDC58500A2A94A /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				183722F02BFD279800462FDD /* LoginViewController.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		18731FF82BFDC59300A2A94A /* HomePage */ = {
+			isa = PBXGroup;
+			children = (
+				183722FE2BFD28BD00462FDD /* HomeScreenViewController.swift */,
+				183722F22BFD27C900462FDD /* HomeTabBarController.swift */,
+			);
+			path = HomePage;
+			sourceTree = "<group>";
+		};
+		18731FF92BFDC5A800A2A94A /* Note */ = {
+			isa = PBXGroup;
+			children = (
+				183722FA2BFD286D00462FDD /* CreateNoteViewController.swift */,
+				183722FC2BFD288C00462FDD /* EditNoteViewController.swift */,
+				183723022BFD2F9300462FDD /* NoteDetailViewController.swift */,
+			);
+			path = Note;
+			sourceTree = "<group>";
+		};
+		18731FFA2BFDC5BE00A2A94A /* Folder */ = {
+			isa = PBXGroup;
+			children = (
+				183722F82BFD281D00462FDD /* FolderCollectionViewCell.swift */,
+				183723002BFD295C00462FDD /* FolderDetailViewController.swift */,
+				183722F62BFD27FB00462FDD /* NoteFoldersViewController.swift */,
+			);
+			path = Folder;
+			sourceTree = "<group>";
+		};
+		18731FFB2BFDC5CF00A2A94A /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				183722F42BFD27E100462FDD /* SettingsViewController.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		18A49BCD2BFD25DA00B137E8 = {

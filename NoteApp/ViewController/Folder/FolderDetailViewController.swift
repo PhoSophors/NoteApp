@@ -1,3 +1,10 @@
+/**
+ * Name: Pho Sohpors
+ * Date: 21 May 2024
+ *
+ * Folder Detail View Controller
+ */
+
 import UIKit
 
 class FolderDetailViewController: UIViewController {
@@ -69,8 +76,9 @@ extension FolderDetailViewController: UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedNote = notes[indexPath.row]
-        let noteDetailVC = NoteDetailViewController(title: selectedNote.title, detail: selectedNote.detail)
-        navigationController?.pushViewController(noteDetailVC, animated: true)
+        let editNoteVC = EditNoteViewController(noteTitle: selectedNote.title, noteDetail: selectedNote.detail)
+        editNoteVC.delegate = self
+        navigationController?.pushViewController(editNoteVC, animated: true)
     }
     
     // Add swipe actions for edit and delete
@@ -83,17 +91,9 @@ extension FolderDetailViewController: UITableViewDataSource, UITableViewDelegate
         }
         
         // Edit action
-        let editAction = UIContextualAction(style: .normal, title: "Edit") { (action, view, handler) in
-            let selectedNote = self.notes[indexPath.row]
-            let editNoteVC = EditNoteViewController(noteTitle: selectedNote.title, noteDetail: selectedNote.detail)
-            editNoteVC.delegate = self
-            self.navigationController?.pushViewController(editNoteVC, animated: true)
-            handler(true)
-        }
-        editAction.backgroundColor = .blue
         
-        let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
-        configuration.performsFirstActionWithFullSwipe = false
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+               configuration.performsFirstActionWithFullSwipe = true
         return configuration
     }
     
@@ -108,8 +108,12 @@ extension FolderDetailViewController: UITableViewDataSource, UITableViewDelegate
         if let selectedIndex = tableView.indexPathForSelectedRow?.row {
             notes[selectedIndex] = (title: title, detail: detail)
             tableView.reloadRows(at: [IndexPath(row: selectedIndex, section: 0)], with: .automatic)
+        } else {
+            // This case handles if the note is edited from a swipe action
+            if let index = notes.firstIndex(where: { $0.title == title }) {
+                notes[index] = (title: title, detail: detail)
+                tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+            }
         }
     }
-    
 }
-

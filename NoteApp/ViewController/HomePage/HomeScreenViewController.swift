@@ -1,3 +1,10 @@
+/**
+ * Name: Pho Sohpors
+ * Date: 18 May 2024
+ *
+ * Home Screen View Controller
+ */
+
 import UIKit
 import SnapKit
 

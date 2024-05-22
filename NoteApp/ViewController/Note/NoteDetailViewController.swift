@@ -1,3 +1,10 @@
+/**
+ * Name: Pho Sohpors
+ * Date: 22 May 2024
+ *
+ * Note Detail View Controller
+ */
+
 import UIKit
 
 class NoteDetailViewController: UIViewController {
